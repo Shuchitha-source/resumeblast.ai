@@ -3,16 +3,14 @@ import { supabase } from './lib/supabase'
 import LandingPage from './components/LandingPage'
 import GoogleAnalytics from './components/GoogleAnalytics'
 import ResumeUpload from './components/ResumeUpload'
+import AuthModal from './components/AuthModal'
 import './App.css'
 
 function App() {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const [showSignup, setShowSignup] = useState(false)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
-  const [authLoading, setAuthLoading] = useState(false)
 
   useEffect(() => {
     // Check for existing session
@@ -37,7 +35,7 @@ function App() {
         
         if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
           setUser(session?.user ?? null)
-          setShowSignup(false) // Close signup modal if open
+          setShowSignup(false)
         } else if (event === 'SIGNED_OUT') {
           setUser(null)
         }
@@ -48,32 +46,6 @@ function App() {
 
     return () => subscription.unsubscribe()
   }, [])
-
-  const handleSignUp = async (e) => {
-    e.preventDefault()
-    setAuthLoading(true)
-    setMessage('')
-    
-    try {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo: `${window.location.origin}`
-        }
-      })
-      
-      if (error) throw error
-      
-      setMessage('✅ Success! Check your email for verification link.')
-      setEmail('')
-      setPassword('')
-    } catch (error) {
-      setMessage('❌ Error: ' + error.message)
-    } finally {
-      setAuthLoading(false)
-    }
-  }
 
   const handleSignOut = async () => {
     const { error } = await supabase.auth.signOut()
@@ -117,7 +89,6 @@ function App() {
                 <p><strong>Last Sign In:</strong> {new Date(user.last_sign_in_at).toLocaleString()}</p>
               </div>
 
-              {/* Resume Upload Component */}
               <ResumeUpload 
                 user={user} 
                 onUploadSuccess={() => {
@@ -152,57 +123,18 @@ function App() {
     )
   }
 
-  // Signup modal
+  // Auth modal (Login/Signup)
   if (showSignup) {
     return (
       <>
         <GoogleAnalytics />
-        <div className="modal-overlay" onClick={() => setShowSignup(false)}>
-          <div className="container" onClick={(e) => e.stopPropagation()}>
-            <div className="card">
-              <button className="close-button" onClick={() => setShowSignup(false)}>×</button>
-              <h1>🚀 Get Started</h1>
-              <p className="subtitle">Create your account to begin</p>
-              
-              <form onSubmit={handleSignUp} className="form">
-                <div className="form-group">
-                  <label>Email</label>
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    disabled={authLoading}
-                  />
-                </div>
-                
-                <div className="form-group">
-                  <label>Password</label>
-                  <input
-                    type="password"
-                    placeholder="Create a password (min 6 characters)"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    disabled={authLoading}
-                    minLength={6}
-                  />
-                </div>
-                
-                <button type="submit" disabled={authLoading} className="btn-primary">
-                  {authLoading ? 'Creating Account...' : 'Sign Up'}
-                </button>
-              </form>
-              
-              {message && (
-                <div className={`message ${message.includes('Error') ? 'error' : 'success'}`}>
-                  {message}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
+        <AuthModal 
+          onClose={() => setShowSignup(false)}
+          onSuccess={() => {
+            setMessage('✅ Successfully logged in!')
+            setShowSignup(false)
+          }}
+        />
       </>
     )
   }

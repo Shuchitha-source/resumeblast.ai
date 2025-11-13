@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
 import LandingPage from './components/LandingPage'
 import GoogleAnalytics from './components/GoogleAnalytics'
+import ResumeUpload from './components/ResumeUpload'
 import './App.css'
 
 function App() {
@@ -115,11 +116,26 @@ function App() {
                 <p><strong>Email Verified:</strong> {user.email_confirmed_at ? '✅ Yes' : '⏳ Pending'}</p>
                 <p><strong>Last Sign In:</strong> {new Date(user.last_sign_in_at).toLocaleString()}</p>
               </div>
+
+              {/* Resume Upload Component */}
+              <ResumeUpload 
+                user={user} 
+                onUploadSuccess={() => {
+                  setMessage('✅ Resume uploaded! Ready for optimization and distribution.')
+                }} 
+              />
+
+              {message && (
+                <div className={`message ${message.includes('Error') || message.includes('❌') ? 'error' : 'success'}`}>
+                  {message}
+                </div>
+              )}
               
               <div className="dashboard-actions">
                 <h3>What's Next?</h3>
                 <ul>
-                  <li>Upload your resume</li>
+                  <li>✅ Upload your resume</li>
+                  <li>Pay $149 for optimization & distribution</li>
                   <li>Get AI optimization</li>
                   <li>Distribute to 500+ recruiters</li>
                   <li>Track your results</li>

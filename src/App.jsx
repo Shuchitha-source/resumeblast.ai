@@ -14,17 +14,36 @@ function App() {
   const [authLoading, setAuthLoading] = useState(false)
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null)
-      setLoading(false)
-    })
+    // Check for existing session
+    const checkSession = async () => {
+      try {
+        const { data: { session }, error } = await supabase.auth.getSession()
+        if (error) throw error
+        setUser(session?.user ?? null)
+      } catch (error) {
+        console.error('Error checking session:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
 
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null)
-      setLoading(false)
-    })
+    checkSession()
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (event, session) => {
+        console.log('Auth event:', event, 'Session:', session)
+        
+        if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+          setUser(session?.user ?? null)
+          setShowSignup(false) // Close signup modal if open
+        } else if (event === 'SIGNED_OUT') {
+          setUser(null)
+        }
+        
+        setLoading(false)
+      }
+    )
 
     return () => subscription.unsubscribe()
   }, [])
@@ -38,6 +57,9 @@ function App() {
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
+        options: {
+          emailRedirectTo: `${window.location.origin}`
+        }
       })
       
       if (error) throw error
@@ -56,8 +78,9 @@ function App() {
     const { error } = await supabase.auth.signOut()
     if (error) {
       setMessage('❌ Error signing out: ' + error.message)
+    } else {
+      setShowSignup(false)
     }
-    setShowSignup(false)
   }
 
   // Loading state
@@ -88,7 +111,9 @@ function App() {
             <div className="dashboard">
               <div className="user-info">
                 <p><strong>Email:</strong> {user.email}</p>
+                <p><strong>User ID:</strong> {user.id}</p>
                 <p><strong>Email Verified:</strong> {user.email_confirmed_at ? '✅ Yes' : '⏳ Pending'}</p>
+                <p><strong>Last Sign In:</strong> {new Date(user.last_sign_in_at).toLocaleString()}</p>
               </div>
               
               <div className="dashboard-actions">
@@ -140,7 +165,7 @@ function App() {
                   <label>Password</label>
                   <input
                     type="password"
-                    placeholder="Create a password"
+                    placeholder="Create a password (min 6 characters)"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required

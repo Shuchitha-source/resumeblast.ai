@@ -3,6 +3,7 @@ import { supabase } from './lib/supabase'
 import LandingPage from './components/LandingPage'
 import GoogleAnalytics from './components/GoogleAnalytics'
 import ResumeUpload from './components/ResumeUpload'
+import ResumeBuilder from './components/ResumeBuilder'
 import AuthModal from './components/AuthModal'
 import './App.css'
 
@@ -89,6 +90,7 @@ function App() {
                 <p><strong>Last Sign In:</strong> {new Date(user.last_sign_in_at).toLocaleString()}</p>
               </div>
 
+              {/* Resume Upload Component */}
               <ResumeUpload 
                 user={user} 
                 onUploadSuccess={() => {
@@ -96,16 +98,31 @@ function App() {
                 }} 
               />
 
+              {/* OR Divider */}
+              <div className="divider">
+                <span>OR</span>
+              </div>
+
+              {/* Resume Builder Component */}
+              <ResumeBuilder
+                user={user}
+                onGenerateSuccess={() => {
+                  setMessage('✅ Resume generated! Ready for optimization and distribution.')
+                }}
+              />
+
+              {/* Success/Error Message */}
               {message && (
                 <div className={`message ${message.includes('Error') || message.includes('❌') ? 'error' : 'success'}`}>
                   {message}
                 </div>
               )}
               
+              {/* What's Next Section */}
               <div className="dashboard-actions">
                 <h3>What's Next?</h3>
                 <ul>
-                  <li>✅ Upload your resume</li>
+                  <li>✅ Upload or build your resume</li>
                   <li>Pay $149 for optimization & distribution</li>
                   <li>Get AI optimization</li>
                   <li>Distribute to 500+ recruiters</li>
@@ -113,6 +130,7 @@ function App() {
                 </ul>
               </div>
               
+              {/* Sign Out Button */}
               <button onClick={handleSignOut} className="btn-secondary">
                 Sign Out
               </button>

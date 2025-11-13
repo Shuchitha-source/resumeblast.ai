@@ -14,6 +14,7 @@
     "filepond": "^4.32.10",
     "filepond-plugin-file-validate-size": "^2.2.8",
     "filepond-plugin-file-validate-type": "^1.2.9",
+    "jspdf": "^3.0.3",
     "mammoth": "^1.11.0",
     "pdfjs-dist": "^5.4.394",
     "react": "^19.2.0",

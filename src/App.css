@@ -121,3 +121,35 @@ input:disabled {
   color: #742a2a;
   border: 1px solid #fc8181;
 }
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 32px;
+  cursor: pointer;
+  color: #718096;
+  line-height: 1;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+}
+
+.close-button:hover {
+  color: #2d3748;
+}

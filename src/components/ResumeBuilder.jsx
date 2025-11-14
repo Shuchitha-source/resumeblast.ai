@@ -220,8 +220,36 @@ function ResumeBuilder({ user, onGenerateSuccess }) {
       // Download PDF
       doc.save(fileName)
       
+      // ✅ UPDATED: Generate text representation and pass it to parent
       if (onGenerateSuccess) {
-        onGenerateSuccess({ url: urlData.publicUrl, name: fileName })
+        // Generate text representation of the form data
+        const generatedText = `${formData.fullName}
+${formData.email}
+${formData.phone}
+${formData.location}
+
+PROFESSIONAL SUMMARY:
+${formData.summary}
+
+PROFESSIONAL EXPERIENCE:
+${formData.experience.map(exp => `${exp.position} at ${exp.company}
+${exp.duration}
+${exp.description}`).join('\n\n')}
+
+EDUCATION:
+${formData.education.map(edu => `${edu.degree} - ${edu.school} (${edu.year})`).join('\n')}
+
+SKILLS:
+${formData.skills}
+
+CERTIFICATIONS:
+${formData.certifications}`
+        
+        onGenerateSuccess({ 
+          url: urlData.publicUrl, 
+          name: fileName,
+          text: generatedText 
+        })
       }
 
     } catch (error) {

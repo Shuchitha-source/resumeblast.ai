@@ -5,6 +5,7 @@ import GoogleAnalytics from './components/GoogleAnalytics'
 import ResumeUpload from './components/ResumeUpload'
 import ResumeBuilder from './components/ResumeBuilder'
 import AuthModal from './components/AuthModal'
+import ResumeOptimizer from './components/ResumeOptimizer'
 import './App.css'
 
 function App() {
@@ -12,6 +13,8 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [showSignup, setShowSignup] = useState(false)
   const [message, setMessage] = useState('')
+  const [uploadedResumeText, setUploadedResumeText] = useState('')
+  const [uploadedResumeUrl, setUploadedResumeUrl] = useState('')
 
   useEffect(() => {
     // Check for existing session
@@ -93,7 +96,14 @@ function App() {
               {/* Resume Upload Component */}
               <ResumeUpload 
                 user={user} 
-                onUploadSuccess={() => {
+                onUploadSuccess={({ text, url, name }) => {
+                  console.log('=== UPLOAD SUCCESS ===')
+                  console.log('Text length:', text?.length, 'characters')
+                  console.log('URL:', url)
+                  console.log('Name:', name)
+                  
+                  setUploadedResumeText(text)
+                  setUploadedResumeUrl(url)
                   setMessage('✅ Resume uploaded! Ready for optimization and distribution.')
                 }} 
               />
@@ -106,10 +116,30 @@ function App() {
               {/* Resume Builder Component */}
               <ResumeBuilder
                 user={user}
-                onGenerateSuccess={() => {
+                onGenerateSuccess={({ text, url, name }) => {
+                  console.log('=== GENERATE SUCCESS ===')
+                  console.log('Generated text length:', text?.length, 'characters')
+                  
+                  setUploadedResumeText(text)
+                  setUploadedResumeUrl(url)
                   setMessage('✅ Resume generated! Ready for optimization and distribution.')
                 }}
               />
+
+              {/* Show optimizer only when resume text exists */}
+              {uploadedResumeText && (
+                <>
+                  <div className="divider">
+                    <span>OPTIMIZE</span>
+                  </div>
+
+                  <ResumeOptimizer
+                    user={user}
+                    resumeText={uploadedResumeText}
+                    resumeUrl={uploadedResumeUrl}
+                  />
+                </>
+              )}
 
               {/* Success/Error Message */}
               {message && (
@@ -123,8 +153,8 @@ function App() {
                 <h3>What's Next?</h3>
                 <ul>
                   <li>✅ Upload or build your resume</li>
+                  <li>✅ Optimize with AI</li>
                   <li>Pay $149 for optimization & distribution</li>
-                  <li>Get AI optimization</li>
                   <li>Distribute to 500+ recruiters</li>
                   <li>Track your results</li>
                 </ul>

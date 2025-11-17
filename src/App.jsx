@@ -5,7 +5,9 @@ import GoogleAnalytics from './components/GoogleAnalytics'
 import ResumeUpload from './components/ResumeUpload'
 import ResumeBuilder from './components/ResumeBuilder'
 import AuthModal from './components/AuthModal'
-import ResumeOptimizer from './components/ResumeOptimizer'
+import ResumeOptimizer from "./pages/ResumeOptimizer"
+import ErrorBoundary from './components/ErrorBoundary'
+import { testErrorLogging } from './utils/errorLogger'  // ← ADDED THIS
 import './App.css'
 
 function App() {
@@ -63,7 +65,7 @@ function App() {
   // Loading state
   if (loading) {
     return (
-      <>
+      <ErrorBoundary componentName="App-Loading">
         <GoogleAnalytics />
         <div className="container">
           <div className="card">
@@ -71,14 +73,14 @@ function App() {
             <p>Loading...</p>
           </div>
         </div>
-      </>
+      </ErrorBoundary>
     )
   }
 
   // Dashboard for logged-in users
   if (user) {
     return (
-      <>
+      <ErrorBoundary componentName="App-Dashboard">
         <GoogleAnalytics />
         <div className="container">
           <div className="card">
@@ -167,14 +169,57 @@ function App() {
             </div>
           </div>
         </div>
-      </>
+
+        {/* TEMPORARY: Test Error Logging Button - REMOVE AFTER TESTING */}
+        <button 
+          onClick={async () => {
+            console.clear()
+            console.log('🧪 Starting error logging test...')
+            
+            const results = await testErrorLogging()
+            
+            if (results.testError && results.testAction) {
+              alert('✅ SUCCESS!\n\nBoth error logging and action logging work!\n\n👉 Next Steps:\n1. Check browser console (F12)\n2. Go to Supabase Table Editor\n3. View error_logs and user_actions tables')
+            } else {
+              alert('❌ FAILED!\n\nSomething went wrong.\n\n👉 Check:\n1. Browser console (F12) for errors\n2. Supabase connection\n3. Table permissions')
+            }
+          }}
+          style={{
+            position: 'fixed',
+            bottom: '20px',
+            right: '20px',
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            color: 'white',
+            padding: '16px 24px',
+            border: 'none',
+            borderRadius: '12px',
+            cursor: 'pointer',
+            zIndex: 9999,
+            fontSize: '16px',
+            fontWeight: 'bold',
+            boxShadow: '0 8px 16px rgba(102, 126, 234, 0.4)',
+            transition: 'all 0.2s ease',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.transform = 'translateY(-4px)'
+            e.target.style.boxShadow = '0 12px 24px rgba(102, 126, 234, 0.5)'
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.transform = 'translateY(0)'
+            e.target.style.boxShadow = '0 8px 16px rgba(102, 126, 234, 0.4)'
+          }}
+        >
+          🧪 Test Error Logging
+        </button>
+      </ErrorBoundary>
     )
   }
 
   // Auth modal (Login/Signup)
   if (showSignup) {
     return (
-      <>
+      <ErrorBoundary componentName="App-AuthModal">
         <GoogleAnalytics />
         <AuthModal 
           onClose={() => setShowSignup(false)}
@@ -183,16 +228,16 @@ function App() {
             setShowSignup(false)
           }}
         />
-      </>
+      </ErrorBoundary>
     )
   }
 
   // Landing page
   return (
-    <>
+    <ErrorBoundary componentName="App-Landing">
       <GoogleAnalytics />
       <LandingPage onGetStarted={() => setShowSignup(true)} />
-    </>
+    </ErrorBoundary>
   )
 }
 

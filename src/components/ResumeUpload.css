@@ -1,8 +1,16 @@
+/* ==========================================
+   MAIN CONTAINER
+   ========================================== */
 .resume-upload {
   margin: 30px 0;
+  padding: 24px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.resume-upload h2 {
+.resume-upload h2,
+.resume-upload h3 {
   font-size: 24px;
   margin-bottom: 10px;
   color: #2d3748;
@@ -14,7 +22,122 @@
   font-size: 14px;
 }
 
-/* FilePond Custom Styling */
+/* ==========================================
+   UPLOAD ZONE (New Drag & Drop)
+   ========================================== */
+.upload-zone {
+  border: 3px dashed #cbd5e0;
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background: #f7fafc;
+  margin-bottom: 20px;
+}
+
+.upload-zone:hover {
+  border-color: #667eea;
+  background: #f0f4ff;
+}
+
+.upload-zone.uploading {
+  border-color: #667eea;
+  background: #e0e7ff;
+  cursor: not-allowed;
+}
+
+.upload-label {
+  cursor: pointer;
+  display: block;
+}
+
+.upload-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.upload-text {
+  font-size: 16px;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.upload-text strong {
+  color: #667eea;
+  font-weight: 600;
+}
+
+.upload-hint {
+  font-size: 14px;
+  color: #718096;
+}
+
+/* ==========================================
+   UPLOAD SPINNER & PROGRESS
+   ========================================== */
+.upload-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e2e8f0;
+  border-top-color: #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.upload-progress {
+  width: 100%;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 16px;
+}
+
+.upload-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.3s ease;
+}
+
+/* ==========================================
+   FILE REQUIREMENTS
+   ========================================== */
+.upload-requirements {
+  margin-top: 24px;
+  padding: 16px;
+  background: #f7fafc;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+}
+
+.upload-requirements h4 {
+  margin: 0 0 12px 0;
+  color: #2d3748;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.upload-requirements ul {
+  margin: 0;
+  padding-left: 20px;
+  color: #718096;
+  font-size: 14px;
+}
+
+.upload-requirements li {
+  margin-bottom: 8px;
+}
+
+/* ==========================================
+   FILEPOND CUSTOM STYLING (Legacy Support)
+   ========================================== */
 .filepond--root {
   margin-bottom: 20px;
 }
@@ -41,7 +164,9 @@
   background: rgba(102, 126, 234, 0.1);
 }
 
-/* Parsing Loader */
+/* ==========================================
+   PARSING LOADER
+   ========================================== */
 .parsing-loader {
   text-align: center;
   padding: 20px;
@@ -60,17 +185,14 @@
   margin: 0 auto 15px;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
 .parsing-loader p {
   color: #4a5568;
   font-size: 14px;
 }
 
-/* Extracted Content Preview */
+/* ==========================================
+   EXTRACTED CONTENT PREVIEW
+   ========================================== */
 .extracted-preview {
   margin-top: 20px;
   padding: 20px;
@@ -97,6 +219,8 @@
   max-height: 200px;
   overflow-y: auto;
   position: relative;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .view-full-button {
@@ -115,15 +239,34 @@
 .view-full-button:hover {
   background: #5568d3;
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
-/* Message Styling */
+.view-full-button:active {
+  transform: translateY(0);
+}
+
+/* ==========================================
+   MESSAGE STYLING
+   ========================================== */
 .message {
   margin-top: 15px;
   padding: 12px 16px;
   border-radius: 8px;
   font-size: 14px;
   text-align: center;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .message.success {
@@ -138,13 +281,123 @@
   border: 1px solid #fc8181;
 }
 
-/* Responsive */
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
 @media (max-width: 768px) {
-  .resume-upload h2 {
+  .resume-upload {
+    padding: 16px;
+    margin: 20px 0;
+  }
+
+  .resume-upload h2,
+  .resume-upload h3 {
     font-size: 20px;
+  }
+  
+  .upload-zone {
+    padding: 30px 20px;
+  }
+
+  .upload-icon {
+    font-size: 36px;
+  }
+
+  .upload-text {
+    font-size: 14px;
+  }
+
+  .upload-hint {
+    font-size: 12px;
   }
   
   .text-preview {
     font-size: 12px;
+    max-height: 150px;
+  }
+
+  .upload-requirements {
+    padding: 12px;
+  }
+
+  .upload-requirements h4 {
+    font-size: 13px;
+  }
+
+  .upload-requirements ul {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .resume-upload {
+    padding: 12px;
+  }
+
+  .upload-zone {
+    padding: 20px 15px;
+  }
+
+  .upload-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+  }
+
+  .upload-text {
+    font-size: 13px;
+  }
+
+  .message {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+}
+
+/* ==========================================
+   ACCESSIBILITY
+   ========================================== */
+.upload-zone:focus-within {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+.view-full-button:focus {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* Hide file input but keep it accessible */
+input[type="file"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ==========================================
+   SMOOTH TRANSITIONS
+   ========================================== */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ==========================================
+   PRINT STYLES
+   ========================================== */
+@media print {
+  .resume-upload {
+    box-shadow: none;
+    border: 1px solid #e2e8f0;
+  }
+
+  .upload-zone,
+  .upload-requirements,
+  .message {
+    page-break-inside: avoid;
   }
 }

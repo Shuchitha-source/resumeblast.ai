@@ -2,25 +2,87 @@ import { useState } from 'react'
 import './LandingPage.css'
 
 function LandingPage({ onGetStarted }) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    closeMobileMenu();
+  };
+
   return (
     <div className="landing-page">
+      {/* Navigation Bar */}
+      <nav className="navbar">
+        <div className="navbar-container">
+          <div className="navbar-logo" onClick={() => scrollToSection('home')}>
+            <span className="logo-icon">🚀</span>
+            <span className="logo-text">ResumeBlast.ai</span>
+          </div>
+          
+          <ul className={`navbar-menu ${mobileMenuOpen ? 'mobile-active' : ''}`}>
+            <li>
+              <button className="nav-link" onClick={() => scrollToSection('home')}>
+                Home
+              </button>
+            </li>
+            <li>
+              <button className="nav-link" onClick={() => scrollToSection('how-it-works')}>
+                How It Works
+              </button>
+            </li>
+            <li>
+              <button className="nav-link" onClick={() => scrollToSection('pricing')}>
+                Pricing
+              </button>
+            </li>
+            <li>
+              <button className="nav-link nav-login" onClick={onGetStarted}>
+                Login
+              </button>
+            </li>
+            <li>
+              <button className="nav-link nav-profile" onClick={onGetStarted}>
+                Profile
+              </button>
+            </li>
+          </ul>
+          
+          <button className="mobile-menu-btn" onClick={toggleMobileMenu} aria-label="Toggle menu">
+            <span>{mobileMenuOpen ? '✕' : '☰'}</span>
+          </button>
+        </div>
+      </nav>
+
       {/* Hero Section with SEO Keywords */}
-      <section className="hero">
+      <section id="home" className="hero">
         <div className="hero-content">
           <h1>Blast Your Resume with AI 🚀</h1>
           <p className="tagline">AI-Powered Resume Optimization & Mass Distribution to 500+ Recruiters</p>
           <p className="subtitle">
             Get your resume in front of top recruiters and land interviews faster with AI-optimized applications
           </p>
-          <button className="cta-button" onClick={onGetStarted}>
-            Start Your Job Search - $149
-          </button>
+          <div className="cta-container">
+            <button className="cta-button large" onClick={onGetStarted}>
+              Start Your Job Search - $149
+            </button>
+          </div>
           <p className="trust-badge">✅ Trusted by 10,000+ job seekers | ⭐ 4.9/5 rating</p>
         </div>
       </section>
 
       {/* How It Works Section */}
-      <section className="how-it-works">
+      <section id="how-it-works" className="how-it-works">
         <h2>How ResumeBlast.ai Works</h2>
         <p className="section-subtitle">Land your dream job in 4 simple steps</p>
         <div className="steps">
@@ -52,7 +114,7 @@ function LandingPage({ onGetStarted }) {
       </section>
 
       {/* Pricing Section - Enhanced */}
-      <section className="pricing">
+      <section id="pricing" className="pricing">
         <h2>Simple, Transparent Pricing</h2>
         <p className="section-subtitle">One-time payment. No subscriptions. No hidden fees.</p>
         
@@ -131,7 +193,7 @@ function LandingPage({ onGetStarted }) {
       </section>
 
       {/* Testimonials Section */}
-      <section className="testimonials">
+      <section id="testimonials" className="testimonials">
         <h2>What Our Users Say</h2>
         <p className="section-subtitle">Join thousands of successful job seekers</p>
         

@@ -1,0 +1,133 @@
+/* src/components/ResumeUpload.css */
+
+/* Main Container */
+.resume-upload {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+  margin-bottom: 30px;
+}
+
+.resume-upload h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.upload-description {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+/* Professional Drag & Drop Zone */
+.upload-zone {
+  border: 2px dashed #e5e7eb;
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  background: #f9fafb;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-zone:hover {
+  border-color: #DC2626; /* Red Border on Hover */
+  background: #FEF2F2;   /* Very light red tint */
+}
+
+.upload-zone.uploading {
+  border-color: #DC2626;
+  background: white;
+  cursor: default;
+}
+
+/* Icon & Label Styling */
+.upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.upload-icon {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 16px;
+  background: #FEE2E2; /* Light Red Circle */
+  color: #DC2626;      /* Red Icon */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  transition: transform 0.3s ease;
+}
+
+.upload-zone:hover .upload-icon {
+  transform: scale(1.1);
+  background: #DC2626;
+  color: white;
+}
+
+.upload-text {
+  font-size: 16px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.upload-text strong {
+  color: #DC2626; /* Red Highlight */
+  text-decoration: underline;
+}
+
+/* Uploading Spinner */
+.upload-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #FEE2E2;
+  border-top: 3px solid #DC2626;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Success/Error Messages */
+.message {
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.message.success {
+  background: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #10B981;
+}
+
+.message.error {
+  background: #FEF2F2;
+  color: #991B1B;
+  border: 1px solid #F87171;
+}

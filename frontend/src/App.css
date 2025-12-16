@@ -1,0 +1,557 @@
+/* App.css - Updated with Red, White, Black Theme */
+/* This preserves all existing classes while adding new color scheme */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
+/* ============================================
+   ROOT VARIABLES - EASY TO CHANGE COLORS
+   ============================================ */
+:root {
+  /* Red Theme Colors */
+  --primary-red: #DC2626;
+  --dark-red: #991B1B;
+  --light-red: #FEE2E2;
+  
+  /* Neutral Colors */
+  --white: #FFFFFF;
+  --off-white: #F9FAFB;
+  --light-gray: #F3F4F6;
+  --gray: #6B7280;
+  --dark-gray: #374151;
+  --near-black: #111827;
+  --black: #000000;
+  
+  /* Shadows */
+  --shadow-red: 0 10px 25px -5px rgba(220, 38, 38, 0.2);
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   GLOBAL RESETS - KEEPS EXISTING FUNCTIONALITY
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: var(--white);
+  color: var(--near-black);
+  line-height: 1.6;
+  overflow-x: hidden;
+  /* IMPORTANT: Ensures desktop view */
+  min-width: 320px;
+}
+
+/* ============================================
+   DESKTOP VIEW FIX - MAIN CONTAINER
+   ============================================ */
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.App {
+  width: 100%;
+  min-height: 100vh;
+  /* Remove any max-width restrictions */
+  max-width: none !important;
+}
+
+/* Container for desktop-optimized content */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+/* ============================================
+   CUSTOM SCROLLBAR - RED THEME
+   ============================================ */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--off-white);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-red);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-red);
+}
+
+/* ============================================
+   BUTTON STYLES - RED THEME
+   ============================================ */
+/* Primary Button - Red gradient */
+.btn-primary,
+.primary-button,
+button[type="submit"]:not(.secondary) {
+  background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
+  color: var(--white);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-red);
+}
+
+.btn-primary:hover,
+.primary-button:hover,
+button[type="submit"]:not(.secondary):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
+}
+
+.btn-primary:active,
+.primary-button:active {
+  transform: translateY(0);
+}
+
+/* Secondary Button - White with red border */
+.btn-secondary,
+.secondary-button {
+  background: var(--white);
+  color: var(--primary-red);
+  border: 2px solid var(--primary-red);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover,
+.secondary-button:hover {
+  background: var(--primary-red);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* Outline Button - Black border */
+.btn-outline {
+  background: transparent;
+  color: var(--near-black);
+  border: 2px solid var(--black);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: var(--black);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* Disabled state */
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* ============================================
+   CARD STYLES - MAINTAINS FUNCTIONALITY
+   ============================================ */
+.card,
+.feature-card,
+.stat-card {
+  background: var(--white);
+  border: 1px solid var(--light-gray);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card);
+  transition: all 0.3s ease;
+}
+
+.card:hover,
+.feature-card:hover,
+.stat-card:hover {
+  border-color: var(--primary-red);
+  box-shadow: var(--shadow-red);
+  transform: translateY(-4px);
+}
+
+/* ============================================
+   INPUT FIELDS - RED FOCUS STATES
+   ============================================ */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"],
+textarea,
+select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--light-gray);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background: var(--white);
+  color: var(--near-black);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary-red);
+  box-shadow: 0 0 0 3px var(--light-red);
+}
+
+input:hover,
+textarea:hover,
+select:hover {
+  border-color: var(--gray);
+}
+
+/* File upload styling */
+input[type="file"] {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+/* ============================================
+   LINKS - RED THEME
+   ============================================ */
+a {
+  color: var(--primary-red);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--dark-red);
+  text-decoration: underline;
+}
+
+/* ============================================
+   HEADINGS - CONSISTENT TYPOGRAPHY
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: var(--near-black);
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+}
+
+/* ============================================
+   BADGES - RED AND BLACK VARIANTS
+   ============================================ */
+.badge,
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.badge-red,
+.badge-primary {
+  background: var(--light-red);
+  color: var(--primary-red);
+  border: 1px solid var(--primary-red);
+}
+
+.badge-black,
+.badge-dark {
+  background: var(--near-black);
+  color: var(--white);
+}
+
+.badge-success {
+  background: #D1FAE5;
+  color: #059669;
+  border: 1px solid #059669;
+}
+
+/* ============================================
+   LOADING SPINNER - RED THEME
+   ============================================ */
+.spinner,
+.loading-spinner {
+  border: 4px solid var(--light-red);
+  border-top: 4px solid var(--primary-red);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ============================================
+   ALERTS AND NOTIFICATIONS
+   ============================================ */
+.alert {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  border-left: 4px solid;
+}
+
+.alert-success {
+  background: #D1FAE5;
+  border-color: #059669;
+  color: #065F46;
+}
+
+.alert-error {
+  background: var(--light-red);
+  border-color: var(--primary-red);
+  color: var(--dark-red);
+}
+
+.alert-info {
+  background: #DBEAFE;
+  border-color: #3B82F6;
+  color: #1E40AF;
+}
+
+/* ============================================
+   NAVIGATION/HEADER FIXES
+   ============================================ */
+header,
+nav,
+.navbar {
+  background: var(--white);
+  border-bottom: 2px solid var(--light-gray);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+}
+
+/* ============================================
+   MODAL/OVERLAY STYLES
+   ============================================ */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-content {
+  background: var(--white);
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--gray);
+  transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+  color: var(--primary-red);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.text-red {
+  color: var(--primary-red);
+}
+
+.text-black {
+  color: var(--near-black);
+}
+
+.text-gray {
+  color: var(--gray);
+}
+
+.bg-red {
+  background-color: var(--primary-red);
+}
+
+.bg-light-red {
+  background-color: var(--light-red);
+}
+
+.bg-white {
+  background-color: var(--white);
+}
+
+.bg-black {
+  background-color: var(--near-black);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+
+.rounded {
+  border-radius: 0.5rem;
+}
+
+.shadow {
+  box-shadow: var(--shadow-card);
+}
+
+/* ============================================
+   RESPONSIVE FIXES FOR DESKTOP VIEW
+   ============================================ */
+@media (min-width: 1024px) {
+  /* Ensure full width on desktop */
+  .App,
+  main,
+  .main-content {
+    width: 100%;
+    max-width: none;
+  }
+  
+  /* Center content with proper padding */
+  .content-wrapper {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+.fade-in {
+  animation: fadeIn 0.6s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* ============================================
+   PRESERVE EXISTING FUNCTIONALITY
+   ============================================ */
+/* This ensures all your existing Week 1 work continues to function */
+/* Only colors and visual styling are changed, not functionality */

@@ -1,0 +1,97 @@
+/* src/App.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  /* Brand Colors - Professional Palette */
+  --primary-red: #DC2626;      /* Main Action Color */
+  --dark-red: #991B1B;         /* Hover States */
+  --light-red-bg: #FEF2F2;     /* Subtle Backgrounds */
+  --red-accent: #EF4444;       /* Highlights */
+  
+  /* Neutral Colors */
+  --bg-white: #FFFFFF;
+  --bg-off-white: #F9FAFB;     /* Very light gray for section separation */
+  --bg-dark: #111827;          /* Footer/Dark sections */
+  
+  /* Text Colors */
+  --text-main: #111827;        /* Main Headings (Near Black) */
+  --text-body: #4B5563;        /* Body Text (Dark Gray) */
+  --text-muted: #9CA3AF;       /* Secondary Text */
+  --text-on-dark: #FFFFFF;     /* Text on dark backgrounds */
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-red-glow: 0 10px 25px -5px rgba(220, 38, 38, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-white);
+  color: var(--text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Global Button Styles --- */
+.btn-primary {
+  background: var(--primary-red);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px rgba(220, 38, 38, 0.2);
+}
+
+.btn-primary:hover {
+  background: var(--dark-red);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(220, 38, 38, 0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--primary-red);
+  color: var(--primary-red);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+  background: var(--light-red-bg);
+}
+
+/* Layout Utilities */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+  padding-top: 80px; /* Space for fixed navbar */
+}

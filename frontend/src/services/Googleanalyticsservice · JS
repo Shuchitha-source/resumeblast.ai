@@ -1,0 +1,223 @@
+// services/googleAnalyticsService.js
+/**
+ * Google Analytics Event Tracking Service
+ * Centralized service for tracking user interactions
+ */
+
+/**
+ * Track page views
+ */
+export const trackPageView = (pagePath, pageTitle) => {
+  if (window.gtag) {
+    window.gtag('config', 'G-6NHVZMSX04', {
+      page_path: pagePath,
+      page_title: pageTitle,
+    })
+    console.log('📊 Page View:', pagePath, pageTitle)
+  }
+}
+
+/**
+ * Track button clicks
+ */
+export const trackButtonClick = (buttonName, location) => {
+  if (window.gtag) {
+    window.gtag('event', 'button_click', {
+      event_category: 'engagement',
+      event_label: buttonName,
+      page_location: location,
+    })
+    console.log('📊 Button Click:', buttonName)
+  }
+}
+
+/**
+ * Track user authentication events
+ */
+export const trackAuth = (action, method = 'email') => {
+  if (window.gtag) {
+    window.gtag('event', action, {
+      event_category: 'authentication',
+      event_label: method,
+    })
+    console.log('📊 Auth Event:', action, method)
+  }
+}
+
+/**
+ * Track resume upload
+ */
+export const trackResumeUploadGA = (fileType, fileSize) => {
+  if (window.gtag) {
+    window.gtag('event', 'resume_upload', {
+      event_category: 'resume',
+      event_label: fileType,
+      value: Math.round(fileSize / 1024), // Size in KB
+    })
+    console.log('📊 Resume Upload:', fileType, fileSize)
+  }
+}
+
+/**
+ * Track resume analysis
+ */
+export const trackResumeAnalysisGA = (score, industry) => {
+  if (window.gtag) {
+    window.gtag('event', 'resume_analysis', {
+      event_category: 'resume',
+      event_label: industry,
+      value: score,
+    })
+    console.log('📊 Resume Analysis:', score, industry)
+  }
+}
+
+/**
+ * Track payment initiation
+ */
+export const trackPaymentInitiatedGA = (amount, currency = 'USD') => {
+  if (window.gtag) {
+    window.gtag('event', 'begin_checkout', {
+      event_category: 'ecommerce',
+      currency: currency,
+      value: amount / 100, // Convert cents to dollars
+      items: [{
+        item_id: 'resume_blast_premium',
+        item_name: 'ResumeBlast Premium',
+        price: amount / 100,
+        quantity: 1,
+      }]
+    })
+    console.log('📊 Payment Initiated:', amount)
+  }
+}
+
+/**
+ * Track successful payment
+ */
+export const trackPaymentSuccessGA = (transactionId, amount, currency = 'USD') => {
+  if (window.gtag) {
+    window.gtag('event', 'purchase', {
+      event_category: 'ecommerce',
+      transaction_id: transactionId,
+      currency: currency,
+      value: amount / 100, // Convert cents to dollars
+      items: [{
+        item_id: 'resume_blast_premium',
+        item_name: 'ResumeBlast Premium',
+        price: amount / 100,
+        quantity: 1,
+      }]
+    })
+    console.log('📊 Payment Success:', transactionId, amount)
+  }
+}
+
+/**
+ * Track blast initiation
+ */
+export const trackBlastInitiatedGA = (recipientCount, industry) => {
+  if (window.gtag) {
+    window.gtag('event', 'blast_initiated', {
+      event_category: 'blast',
+      event_label: industry,
+      value: recipientCount,
+    })
+    console.log('📊 Blast Initiated:', recipientCount, industry)
+  }
+}
+
+/**
+ * Track blast completion
+ */
+export const trackBlastCompletedGA = (recipientCount, industry) => {
+  if (window.gtag) {
+    window.gtag('event', 'blast_completed', {
+      event_category: 'blast',
+      event_label: industry,
+      value: recipientCount,
+    })
+    console.log('📊 Blast Completed:', recipientCount, industry)
+  }
+}
+
+/**
+ * Track form submissions
+ */
+export const trackFormSubmission = (formName) => {
+  if (window.gtag) {
+    window.gtag('event', 'form_submit', {
+      event_category: 'engagement',
+      event_label: formName,
+    })
+    console.log('📊 Form Submit:', formName)
+  }
+}
+
+/**
+ * Track navigation clicks
+ */
+export const trackNavigation = (destination) => {
+  if (window.gtag) {
+    window.gtag('event', 'navigation_click', {
+      event_category: 'navigation',
+      event_label: destination,
+    })
+    console.log('📊 Navigation:', destination)
+  }
+}
+
+/**
+ * Track errors
+ */
+export const trackError = (errorMessage, errorLocation) => {
+  if (window.gtag) {
+    window.gtag('event', 'exception', {
+      description: errorMessage,
+      fatal: false,
+      page_location: errorLocation,
+    })
+    console.log('📊 Error:', errorMessage, errorLocation)
+  }
+}
+
+/**
+ * Track user signup conversion
+ */
+export const trackSignupConversion = (method = 'email') => {
+  if (window.gtag) {
+    window.gtag('event', 'sign_up', {
+      method: method,
+    })
+    console.log('📊 Signup Conversion:', method)
+  }
+}
+
+/**
+ * Track user login conversion
+ */
+export const trackLoginConversion = (method = 'email') => {
+  if (window.gtag) {
+    window.gtag('event', 'login', {
+      method: method,
+    })
+    console.log('📊 Login Conversion:', method)
+  }
+}
+
+export default {
+  trackPageView,
+  trackButtonClick,
+  trackAuth,
+  trackResumeUploadGA,
+  trackResumeAnalysisGA,
+  trackPaymentInitiatedGA,
+  trackPaymentSuccessGA,
+  trackBlastInitiatedGA,
+  trackBlastCompletedGA,
+  trackFormSubmission,
+  trackNavigation,
+  trackError,
+  trackSignupConversion,
+  trackLoginConversion,
+}

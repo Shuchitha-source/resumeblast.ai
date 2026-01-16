@@ -1,0 +1,459 @@
+/* Add these styles to /frontend/src/components/BlastConfig.css */
+
+/* Payment Banner Styles */
+.payment-banner {
+  background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+}
+
+.payment-info h3 {
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.payment-info p {
+  color: #FEE2E2;
+  margin: 0 0 16px 0;
+  font-size: 14px;
+}
+
+.price-tag {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.price-tag .currency {
+  color: #FEE2E2;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.price-tag .amount {
+  color: #ffffff;
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.price-tag .period {
+  color: #FEE2E2;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.payment-button {
+  background-color: #ffffff;
+  color: #DC2626;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.payment-button:hover:not(:disabled) {
+  background-color: #FEE2E2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.payment-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.payment-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Success Banner */
+.success-banner {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  border-radius: 12px;
+  padding: 16px 24px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
+}
+
+.check-icon {
+  font-size: 24px;
+}
+
+/* Spinner Animation */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(220, 38, 38, 0.2);
+  border-top-color: #DC2626;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+.payment-button .spinner {
+  border: 2px solid rgba(220, 38, 38, 0.2);
+  border-top-color: #DC2626;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .payment-banner {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .payment-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .price-tag {
+    justify-content: center;
+  }
+}
+
+/* Disabled State Styling */
+.form-group select:disabled,
+.load-btn:disabled,
+.send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #E5E7EB;
+}
+
+/* Error and Success Messages */
+.error-message {
+  background-color: #FEE2E2;
+  border: 2px solid #DC2626;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #991B1B;
+}
+
+.error-icon {
+  font-size: 20px;
+}
+
+.success-message {
+  background-color: #D1FAE5;
+  border: 2px solid #059669;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #047857;
+}
+
+.success-icon {
+  font-size: 20px;
+}
+
+/* Modal Overlay Enhancement */
+.blast-config-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.blast-config-modal {
+  background: #ffffff;
+  border-radius: 16px;
+  max-width: 700px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Modal Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: #111827;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #6B7280;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.2s ease;
+}
+
+.close-btn:hover {
+  color: #DC2626;
+}
+
+/* Modal Body */
+.modal-body {
+  padding: 24px;
+}
+
+.config-section {
+  margin-bottom: 24px;
+}
+
+.config-section h3 {
+  color: #111827;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  color: #374151;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid #E5E7EB;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #111827;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease;
+}
+
+.form-group select:focus {
+  outline: none;
+  border-color: #DC2626;
+}
+
+.load-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #DC2626;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.load-btn:hover:not(:disabled) {
+  background-color: #991B1B;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.load-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Recruiters Section */
+.recruiters-section {
+  margin-top: 24px;
+}
+
+.recruiters-section h3 {
+  color: #111827;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+}
+
+.recruiters-list {
+  background-color: #F9FAFB;
+  border-radius: 8px;
+  padding: 16px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.recruiter-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.recruiter-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.recruiter-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.recruiter-name {
+  color: #111827;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 0 0 4px 0;
+}
+
+.recruiter-company {
+  color: #6B7280;
+  font-size: 13px;
+  margin: 0 0 2px 0;
+}
+
+.recruiter-email {
+  color: #9CA3AF;
+  font-size: 12px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.more-recruiters {
+  text-align: center;
+  color: #6B7280;
+  font-size: 14px;
+  margin: 12px 0 0 0;
+  font-weight: 600;
+}
+
+/* Modal Footer */
+.modal-footer {
+  display: flex;
+  gap: 12px;
+  padding: 24px;
+  border-top: 1px solid #E5E7EB;
+}
+
+.cancel-btn {
+  flex: 1;
+  padding: 12px;
+  background-color: #F3F4F6;
+  color: #6B7280;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-btn:hover {
+  background-color: #E5E7EB;
+}
+
+.send-btn {
+  flex: 2;
+  padding: 12px;
+  background-color: #DC2626;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.send-btn:hover:not(:disabled) {
+  background-color: #991B1B;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+}
+
+.send-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Scrollbar Styling */
+.recruiters-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.recruiters-list::-webkit-scrollbar-track {
+  background: #F3F4F6;
+  border-radius: 4px;
+}
+
+.recruiters-list::-webkit-scrollbar-thumb {
+  background: #D1D5DB;
+  border-radius: 4px;
+}
+
+.recruiters-list::-webkit-scrollbar-thumb:hover {
+  background: #9CA3AF;
+}

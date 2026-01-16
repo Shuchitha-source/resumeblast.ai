@@ -1,0 +1,148 @@
+/* src/components/ResumeAnalysis.css */
+.resume-analysis-container {
+  max-width: 900px;
+  margin: 30px auto;
+  font-family: 'Inter', sans-serif;
+}
+
+.analysis-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.analysis-loading {
+  text-align: center;
+  padding: 50px;
+}
+
+.analysis-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.analysis-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  border: 1px solid #e5e7eb;
+}
+
+/* Score Card */
+.score-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.score-ring {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 8px solid #059669;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.score-number {
+  font-size: 32px;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1;
+}
+
+.score-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.recommendation {
+  font-size: 14px;
+  color: #4b5563;
+  line-height: 1.4;
+}
+
+/* Targeting Card */
+.targeting-card .data-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.targeting-card .data-row:last-child {
+  border-bottom: none;
+}
+
+.targeting-card .label {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.targeting-card .value {
+  font-weight: 600;
+  color: #111827;
+}
+
+.targeting-card .value.highlight {
+  color: #DC2626;
+}
+
+/* Skills Card */
+.skills-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-tag {
+  background: #eff6ff;
+  color: #1d4ed8;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* CTA */
+.action-section {
+  text-align: center;
+  margin-top: 40px;
+  background: linear-gradient(to right, #fef2f2, #fff1f2);
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid #fecaca;
+}
+
+.blast-button-large {
+  background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%);
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 18px 36px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 10px 25px -5px rgba(220, 38, 38, 0.4);
+}
+
+.blast-button-large:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 30px -5px rgba(220, 38, 38, 0.5);
+}
+
+.subtext {
+  margin-top: 15px;
+  color: #6b7280;
+  font-size: 14px;
+}

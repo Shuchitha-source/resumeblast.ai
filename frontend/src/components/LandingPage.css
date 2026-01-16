@@ -1,0 +1,488 @@
+/* src/components/LandingPage.css */
+
+.landing-page {
+  width: 100%;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  color: #111827;
+  background-color: #FFFFFF;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero {
+  background: radial-gradient(circle at 50% 0%, #FEF2F2 0%, #FFFFFF 70%);
+  padding: 120px 20px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-content h1 {
+  font-size: 56px;
+  line-height: 1.1;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 32px;
+  letter-spacing: -0.02em;
+}
+
+/* --- ANIMATED HIGHLIGHT BAR --- */
+.highlight-container {
+  position: relative;
+  display: inline-block;
+  color: #111827;
+  z-index: 10;
+  white-space: nowrap;
+  padding: 0 5px;
+}
+
+.highlight-bg {
+  content: "";
+  position: absolute;
+  left: 0;
+  /* CHANGED: Lowered the bar to sit under the text */
+  bottom: 2px; 
+  height: 20px;
+  width: 0%; /* Start Hidden */
+  background-color: #FECACA; 
+  z-index: -1; 
+  border-radius: 4px;
+  opacity: 0.9;
+  transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.highlight-bg.active {
+  width: 100%;
+}
+
+/* --- ANIMATED TAGLINE (Wipe Effect) --- */
+.tagline-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.tagline {
+  font-size: 16px;
+  font-weight: 600;
+  color: #DC2626;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-block;
+  background: #FEF2F2;
+  padding: 6px 16px;
+  border-radius: 50px;
+  border: 1px solid #FEE2E2;
+  
+  /* Initial state: Hidden mask */
+  clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+}
+
+.tagline.animated-wipe {
+  animation: wipeIn 1s cubic-bezier(0.25, 1, 0.5, 1) 0.5s forwards infinite; 
+  /* Infinite loop: wait 0.5s, wipe in, stay, then logic handles reset via keyframes if complex, 
+     but simpler CSS loop is below: */
+  animation: wipeLoop 4s infinite;
+}
+
+@keyframes wipeLoop {
+  0% { clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%); }
+  20% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); } /* Reveal */
+  80% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); } /* Stay Visible */
+  100% { clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); } /* Wipe Out to Right (Optional) or Reset */
+}
+
+/* --- ELEGANT HIGHLIGHT BLOCK --- */
+.hero-highlight-block {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(220, 38, 38, 0.1);
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px -10px rgba(220, 38, 38, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.subtitle {
+  font-size: 20px;
+  color: #374151;
+  font-weight: 500;
+  max-width: 100%;
+  margin: 0 auto 32px;
+  line-height: 1.6;
+}
+
+/* CTA Buttons */
+.cta-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.cta-button {
+  padding: 16px 36px;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.cta-button.large {
+  background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%);
+  color: white;
+  box-shadow: 0 10px 25px -5px rgba(220, 38, 38, 0.4);
+}
+
+.cta-button.large:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px -5px rgba(220, 38, 38, 0.5);
+}
+
+.trust-badge {
+  margin-top: 30px;
+  font-size: 14px;
+  color: #6B7280;
+  font-weight: 500;
+}
+
+/* ============================================
+   HOW IT WORKS SECTION
+   ============================================ */
+.how-it-works {
+  padding: 100px 20px;
+  background: #FFFFFF;
+  text-align: center;
+}
+
+.how-it-works h2 {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: #111827;
+  font-weight: 800;
+}
+
+.section-subtitle {
+  color: #DC2626;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 60px;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.step {
+  background: #FFFFFF;
+  padding: 40px 30px;
+  border-radius: 16px;
+  border: 1px solid #E5E7EB;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.step:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.05);
+  border-color: #FECACA;
+}
+
+.step-number {
+  background: #DC2626;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin: 0 auto 20px;
+}
+
+.step-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+  background: #FEF2F2;
+  width: 90px;
+  height: 90px;
+  line-height: 90px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.step h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: #111827;
+  font-weight: 700;
+}
+
+.step p {
+  color: #4B5563;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* ============================================
+   PRICING SECTION
+   ============================================ */
+.pricing {
+  padding: 100px 20px;
+  background: #F9FAFB;
+  text-align: center;
+  border-top: 1px solid #E5E7EB;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.pricing h2 {
+  font-size: 36px;
+  margin-bottom: 15px;
+  color: #111827;
+}
+
+.pricing-container {
+  max-width: 500px;
+  margin: 50px auto 0;
+}
+
+.pricing-card {
+  background: #FFFFFF;
+  padding: 50px 40px;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.1);
+  position: relative;
+  border: 1px solid #E5E7EB;
+}
+
+.pricing-card.featured {
+  border: 2px solid #DC2626;
+  transform: scale(1.02);
+}
+
+.popular-badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #DC2626;
+  color: white;
+  padding: 6px 20px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.3);
+}
+
+.price-header h3 {
+  font-size: 24px;
+  color: #111827;
+  margin-bottom: 20px;
+}
+
+.price-tag {
+  margin-bottom: 10px;
+}
+
+.currency {
+  font-size: 32px;
+  color: #111827;
+  vertical-align: top;
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.amount {
+  font-size: 72px;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1;
+}
+
+.price-description {
+  color: #6B7280;
+  margin-bottom: 30px;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 35px;
+  text-align: left;
+}
+
+.features-list li {
+  padding: 14px 0;
+  color: #374151;
+  font-size: 16px;
+  border-bottom: 1px solid #F3F4F6;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cta-button.featured {
+  width: 100%;
+  background: #DC2626;
+  color: white;
+}
+
+.cta-button.featured:hover {
+  background: #B91C1C;
+}
+
+.guarantee {
+  margin-top: 20px;
+  color: #9CA3AF;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* ============================================
+   UPSELLS SECTION
+   ============================================ */
+.upsells {
+  padding: 100px 20px;
+  background: #FFFFFF;
+  text-align: center;
+}
+
+.upsells h2 {
+  font-size: 36px;
+  margin-bottom: 60px;
+  color: #111827;
+}
+
+.upsell-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.upsell-card {
+  background: #FFFFFF;
+  padding: 32px;
+  border-radius: 16px;
+  border: 1px solid #E5E7EB;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.upsell-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.1);
+  border-color: #FECACA;
+}
+
+.upsell-card h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: #111827;
+  font-weight: 700;
+}
+
+.upsell-card p {
+  color: #4B5563;
+  line-height: 1.6;
+  font-size: 15px;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.learn-more {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  color: #DC2626;
+  font-size: 15px;
+  transition: gap 0.2s ease;
+  gap: 4px;
+}
+
+.upsell-card:hover .learn-more {
+  gap: 8px;
+  text-decoration: underline;
+}
+
+/* ============================================
+   FINAL CTA SECTION
+   ============================================ */
+.final-cta {
+  padding: 100px 20px;
+  /* Peach Red Gradient */
+  background: linear-gradient(135deg, #FF6B6B 0%, #EE5253 100%);
+  text-align: center;
+  color: white;
+}
+
+.final-cta h2 {
+  font-size: 42px;
+  margin-bottom: 20px;
+  color: white;
+  font-weight: 800;
+}
+
+.final-cta p {
+  font-size: 20px;
+  margin-bottom: 40px;
+  color: rgba(255, 255, 255, 0.95);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.final-cta .cta-button {
+  background: white;
+  color: #EE5253;
+}
+
+.final-cta .cta-button:hover {
+  background: #F9FAFB;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  color: #D63031;
+}
+
+.cta-subtext {
+  font-size: 14px;
+  margin-top: 24px;
+  opacity: 0.9;
+  color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    padding: 100px 20px 60px;
+  }
+  .hero h1 {
+    font-size: 36px;
+  }
+}

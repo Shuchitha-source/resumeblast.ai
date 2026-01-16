@@ -1,0 +1,225 @@
+/* src/components/BlastConfig.css */
+
+.blast-config-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+}
+
+.blast-config-modal {
+  background: white;
+  border-radius: 16px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 24px 16px;
+  border-bottom: 2px solid #f3f4f6;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #1f2937;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 32px;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.close-btn:hover {
+  background: #f3f4f6;
+  color: #1f2937;
+}
+
+.modal-body {
+  padding: 24px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+/* Payment Banner (Matches Screenshot Theme) */
+.payment-banner {
+  background: #FEF2F2; /* Light Red */
+  border: 1px solid #DC2626; /* Red Border */
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.payment-banner h3 {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+  color: #991B1B;
+}
+
+.payment-banner p {
+  margin: 0;
+  font-size: 13px;
+  color: #B91C1C;
+}
+
+.payment-banner .amount {
+  font-size: 24px;
+  font-weight: 800;
+  color: #DC2626;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 12px;
+  padding: 16px 24px 24px;
+  border-top: 2px solid #f3f4f6;
+}
+
+.btn-cancel,
+.cancel-btn {
+  flex: 1;
+  padding: 14px 24px;
+  border: 2px solid #E5E7EB;
+  background: white;
+  color: #4b5563;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-cancel:hover,
+.cancel-btn:hover {
+  background: #F9FAFB;
+  border-color: #D1D5DB;
+}
+
+/* ✅ FIXED: Highlighting the Pay Button (Issue #3) */
+.btn-blast,
+.send-btn {
+  flex: 2;
+  padding: 16px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+  
+  /* Theme: Red Gradient to match application */
+  background: linear-gradient(135deg, #DC2626 0%, #991B1B 100%);
+  color: white;
+  
+  /* Highlighting Shadow */
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-blast:hover:not(:disabled),
+.send-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(220, 38, 38, 0.5);
+  background: linear-gradient(135deg, #EF4444 0%, #B91C1C 100%);
+}
+
+.btn-blast:disabled,
+.send-btn:disabled {
+  background: #E5E7EB;
+  color: #9CA3AF;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Spinner */
+.spinner {
+  border: 3px solid rgba(220, 38, 38, 0.2);
+  border-top: 3px solid #DC2626;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.success-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #059669;
+}
+
+.error-message {
+  padding: 12px;
+  background: #FEF2F2;
+  border: 1px solid #F87171;
+  border-radius: 8px;
+  color: #991B1B;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
